@@ -55,6 +55,7 @@ int main() {
 	
 	if (P2==NULL) {
 		printf("Cant ReAlloc memory.");
+		Yakitori::Free(&P);
 		exit(1);
 	}
 
