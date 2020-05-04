@@ -12,9 +12,9 @@ namespace Yakitori {
 
 		size_t S = N * sizeof(T);
 		T* P = (T*)malloc(S);
-
-		memset(P, 0, S);//oh cant set type of 64bit value... why int??
-
+		if (P != NULL) {
+			memset(P, 0, S);//oh cant set type of 64bit value... why int??
+		}
 		return P;
 	}
 	template<class T>
@@ -41,16 +41,26 @@ int main() {
 	size_t N = 16;
 
 	int* P = Yakitori::New<int>(N);
+	if (P==NULL) {
+		printf("Cant Alloc memory.");
+		exit(1);
+	}
 
 	for (size_t i = 0; i < N; i++) {
 		P[i] = i;
-
 		printf("%d\n", P[i]);
 	}
 
 	int* P2 = Yakitori::ReNew(P,N*2);
+	
+	if (P2==NULL) {
+		printf("Cant ReAlloc memory.");
+		exit(1);
+	}
+
 	if (P2 == P) {
 		P = NULL;
+
 	}
 	
 	for (size_t i = 0; i < N*2; i++) {
